@@ -1,17 +1,15 @@
-function [S] = im2segment(im)
+%function [S] = im2segment(im)
 % [S] = im2segment(im)
 
-nrofsegments = 5;
-m = size(im,1)
-n = size(im,2)
-im_segment = imcomplement(im(:,1:50));
-segment_width = 30;
-S{1} = [imcomplement(im(:,1:50)) zeros(m,n-50)]
-for k = 2:(nrofsegments)
-    figure(k);
-    padding_left=50+(k-2)*segment_width;
-    padding_right=n-(padding_left+segment_width)-1;
-    im_segment = [zeros(m,padding_left) imcomplement(im(:,padding_left:padding_left+segment_width)) zeros(m,padding_right)]./255;
-    show(uint8(im_segment))
-    S{k}= im_segment
-end
+%I = imread('..\datasets\short1\im9.jpg');
+I = im10;
+%imshow(I);
+BW = (I<130);
+%imshow(double(BW))
+cut = 50;
+first = [BW(:,1:cut) zeros(31,461-cut)]
+figure(1)
+imshow(double(BW(:,1:cut)))
+figure(2)
+segment = uint8(first).*double(im10;
+imshow(double(segment))
