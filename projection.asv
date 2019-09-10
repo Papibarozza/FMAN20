@@ -1,4 +1,4 @@
-proj_scalar=@(u,v) sum(sum(u.*v))/norm(v,'fro')
+proj_scalar=@(u,v) sum(sum(u.*v))/norm(v)
 data = load('assignment1bases.mat')
 figure(1)
 image = data.stacks{1}(:,:,5);
@@ -11,10 +11,11 @@ coefficients = [ proj_scalar(image,b1) proj_scalar(image,b2) proj_scalar(image,b
 %Unreadable line thanks to matlab.. However, it maps the image matrix on
 %the coefficients so we get the image's projection on each base matrix.
 %Then we sum them to get the final projection.
-projected_image = sum(bsxfun(@times,data.bases{1},reshape(coefficients,1,1,numel(coefficients))),3)
-
-
+%projected_image = sum(bsxfun(@times,data.bases{1},reshape(coefficients,1,1,numel(coefficients))),3)
+for i = 1:4
+    projected_image = data.bases{1}(:,:,i)*coefficients(i)
+end
 figure(2)
 imshow(uint8(projected_image),'InitialMagnification','fit')
-error_norm = norm(projected_image-image,'fro')
+error_norm = norm(image-projected_image)
 

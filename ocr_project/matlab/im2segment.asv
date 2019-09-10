@@ -1,29 +1,28 @@
 %function [S] = im2segment(im)
-%%
+% [S] = im2segment(im)
+
 I = imread('..\datasets\short1\im9.jpg');
-im = I<140;
+%I = im10;
+%imshow(I);
+BW = (I<150);
+%imshow(double(BW))
 inSegment = 0;
-start_acc= [0];
 start=0;
-cut=0;
-
-for j=1:size(im,2)
-    if(im(:,j)== zeros(size(im,1),1))
-        
-        if(inSegment == 1)
-            start = start+cut;
-            start_acc=[start_acc start];
-            cut=0;
-            inSegment = 0;
-        end
-    else
-        inSegment = 1;    
+for i=1:4
+    for j=1:size(I,1)
+        if(inSegment==0)
+            if(I(:,j:j+1) == ones(31,1))
+                inSegment = 1;
+            else
+                cut=cut+1;
+            end
+       if(inSegment == 1)
+           strip = I(:,start:start+cut);
+           figure(i)
+           imagesc(strip)
+           start = start+cut;
+       end
     end
-    cut=cut+1;
-end
-
-
-
 %%
 cut = 40;
 first = [uint8(BW(:,1:cut)) zeros(31,461-cut)]
@@ -31,7 +30,7 @@ I_inv = uint8(255*ones(size(I)))-I;
 segment = uint8(first).*I_inv
 figure(i)
 imshow(segment)
-
+end
 %%
 ab = imread('..\datasets\short1\im9.jpg');
 nrows = size(ab,1);

@@ -4,7 +4,7 @@ function [ projected_image,error_norm ] = project_img( image,basis )
 %image unto this basis and the error norm between the image and its
 %projection.
 
-proj_scalar=@(u,v) sum(sum(u.*v))/norm(v);
+proj_scalar=@(u,v) sum(sum(u.*v))/norm(v,'fro');
 b1 = basis(:,:,1);
 b2 = basis(:,:,2);
 b3 = basis(:,:,3);
@@ -14,7 +14,7 @@ coefficients = [ proj_scalar(image,b1) proj_scalar(image,b2) proj_scalar(image,b
 %the coefficients so we get the image's projection on each base matrix.
 %Then we sum them to get the final projection.
 projected_image = sum(bsxfun(@times,basis,reshape(coefficients,1,1,numel(coefficients))),3);
-error_norm = norm(image-projected_image);
+error_norm = norm(image-projected_image,'fro');
 
 end
 
