@@ -34,5 +34,25 @@ for i=1:size(start_acc,2)-1
     S{j} = segment;
     j=j+1;
 end
+%%
+cut = 40;
+first = [uint8(BW(:,1:cut)) zeros(31,461-cut)]
+I_inv = uint8(255*ones(size(I)))-I;
+segment = uint8(first).*I_inv
+figure(i)
+imshow(segment)
+
+%%
+I = imread('..\datasets\short1\im9.jpg');
+im = I<140;
+proj = sum(im,1)
+size(proj)
+idxs = find(proj>1)
+%%
+acc= [ ]
+for i = 1:size(idxs,2)
+    
+end
+
 
 
