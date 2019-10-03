@@ -1,6 +1,4 @@
 function prediction = k_nearest_neighbour(x, X_train,Y,k)
-%K_DIST Summary of this function goes here
-%   Detailed explanation goes here
 class_norm = size(X_train,2);
 for i = 1:1:size(X_train,2)
     class_norm(i) = norm(X_train(:,i)-x);

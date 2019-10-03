@@ -30,7 +30,7 @@ j=1;
 %Go through column indexes, extract the segment from the image and pad with
 %zeros
 for i=1:size(start_acc,2)-1
-    segment = [ zeros(size(im,1),start_acc(i)-1) im(:,start_acc(i):start_acc(i+1)) zeros(size(im,1),461-start_acc(i+1)) ];
+    segment = [ zeros(size(im,1),start_acc(i)-1) im(:,start_acc(i):start_acc(i+1)) zeros(size(im,1),size(I,2)-start_acc(i+1)) ];
     S{j} = segment;
     j=j+1;
 end

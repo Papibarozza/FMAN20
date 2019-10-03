@@ -18,7 +18,7 @@ nbr_examples = length(Y);
 % This outer loop will run 100 times, so that you get a mean error for your
 % classifier (the error will become different each time due to the
 % randomness of cvpartition, which you may verify if you wish).
-nbr_trials = 3;
+nbr_trials = 1;
 err_rates_test = zeros(nbr_trials, 4);
 err_rates_train = zeros(nbr_trials, 4);
 for i = 1 : nbr_trials
@@ -114,9 +114,9 @@ for i = 1 : nbr_trials
     err_rate_train_nn =nnz(pred_train_diff_nn) / nbr_train_examples;% = FILL IN
     
     % Store them in the containers
-    err_rates_train(i, 2) = err_rate_train_tree
-    err_rates_train(i, 3) = err_rate_train_svm
-    err_rates_train(i, 4) = err_rate_train_nn
+    err_rates_train(i, 2) = err_rate_train_tree;
+    err_rates_train(i, 3) = err_rate_train_svm;
+    err_rates_train(i, 4) = err_rate_train_nn;
 end
 
 % Finally, after all the trials are done, report mean error rates
@@ -143,12 +143,12 @@ mean_err_rate_train = mean(err_rates_train, 1)
 % not certain of course. Make sure that the two images are extracted from
 % X_test, and not X_train. Write code for this below! 
 
-img = reshape(X(:,1),19,19);
+img = reshape(X_test(:,1),19,19);
 colormap('gray');
 figure(1);
 imagesc(img);
 figure(2);
-img2 = reshape(X(:,5),19,19);
+img2 = reshape(X_test(:,5),19,19);
 colormap('gray');
 imagesc(img2);
-
+classify(X_test(:,5),classification_data)

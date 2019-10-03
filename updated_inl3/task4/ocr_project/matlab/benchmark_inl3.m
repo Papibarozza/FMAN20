@@ -59,7 +59,6 @@ for ii=1:length(a);
             error(['There was an error when I tried to run ' mysystem.segmenter]);
         end
         nrofsegments = length(S);
-        
         % Calculate total foreground of system
         FG_system = zeros(size(im));
         for kk = 1:nrofsegments

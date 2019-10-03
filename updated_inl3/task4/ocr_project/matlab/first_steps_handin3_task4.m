@@ -25,6 +25,8 @@ for i = 1 : numel(S)
     S_feats(:, i) = S_feat;
 end
 
+
+
 % Now we are ready to train our classifier. We use our class_train.m that
 % we wrote in Task 2 in this hand-in. I happened to name my as
 % class_train_knn, instead (I implemented k-nearest neighbour), but of
