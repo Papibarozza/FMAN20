@@ -1,0 +1,28 @@
+datadir = '..\datasets\short1';
+
+a = dir(datadir);
+
+file = 'im1';
+
+fnamebild = [datadir filesep file '.jpg'];
+%fnamebild = '../datasets/short1/im1.jpg'
+fnamefacit = [datadir filesep file '.txt'];
+
+bild = imread(fnamebild);
+fid = fopen(fnamefacit);
+facit = fgetl(fid);
+fclose(fid);
+
+S = im2segment(bild);
+BW = S{1};
+s = regionprops(BW,'centroid')
+s = cat(1,s.Centroid)
+x_center = round(s(:,1));
+BW = BW(:,(x_center-20):x_center+20); %Crop
+f = regionprops(BW,{'Perimeter','MajorAxisLength','Extrema','MinorAxisLength','ConvexArea','Image'})
+feature_vect = [f.Perimeter f.MajorAxisLength f.MinorAxisLength f.ConvexArea reshape(f.Extrema,1,16) double(reshape(f.Image,1,size(f.Image,1)*size(f.Image,2)))];
+assert(size(feature_vect) == [1,258],'Wrong')
+imshow(BW)
+%x = segment2features(B);
+
+
