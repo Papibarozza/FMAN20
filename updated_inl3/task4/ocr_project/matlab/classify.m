@@ -5,11 +5,11 @@ function y = classify(x, classification_data)
 X = classification_data{1};
 Y = classification_data{2};
 pred = k_nearest_neighbour(x,X,Y,5);
-if(sum(pred == 1) > length(pred)/2)
-    y = 1;
+voters = most_common(pred);
+if(length(voters)>1)
+    y = voters;
 else
-    y = -1;
+    y = voters(randi(length(voters)));
 end
 
-end
 

@@ -3,18 +3,19 @@
 
 % Setup the names of the functions of your OCR system. Make sure that all
 % of them reside in this same folder of course!
-mysystem.segmenter = 'im2segment'; % What is the name of your segmentation-algorithm?
+mysystem.segmenter = 'im2segment'; 
+% What is the name of your segmentation-algorithm?
 mysystem.features = 'segment2features'; % What is the name of your features-algorithm?
-mysystem.classifier = 'features2class'; % What is the name of your classification-algorithm?
+mysystem.classifier = 'classify'; % What is the name of your classification-algorithm?
 load classification_data
 mysystem.classification_data = classification_data;
 
 % Choose dataset
-datadir = '../datasets/short1'; % Which folder of examples are you going to test it on?
-%datadir = '../datasets/home1'; % Which folder of examples are you going to test it on?
+%datadir = '../datasets/short1'; % Which folder of examples are you going to test it on?
+datadir = '../datasets/home1'; % Which folder of examples are you going to test it on?
 
 % Benchmark and visualize
-mode = 2; % debug modes 
+mode = 0; % debug modes 
 % 0 with no plots
 % 1 with some plots
 % 2 with the most plots || We recommend setting mode = 2 if you get bad

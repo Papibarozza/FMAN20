@@ -7,5 +7,6 @@ for i = 1:1:size(X_train,2)
 end
 [val ind] = sort(class_norm,'ascend');
 prediction = Y(ind(1:5));
+    
 end
 
