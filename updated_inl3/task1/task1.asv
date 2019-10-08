@@ -31,20 +31,13 @@ plot(x_fine, p_ls(1) * x_fine + p_ls(2))
 % Note that the total least squares line has the form 
 % ax + by + c = 0, but the plot command requires it to be of the form
 % y = kx + m, so make sure to convert appropriately.
-e = 1/size(x,1)
-x_ss = x'*x;
-y_ss = y'*y;
-x_s = sum(x)
-y_s = sum(y)
-xy_ss = x'*y;
-
-A_tls = [x_ss-e*x_s*x_s xy_ss-e*x_s*y_s;xy_ss-e*x_s*y_s y_ss-e*y_s*y_s];
-
+e = (1-1/size(x,1))
+A_tls = toeplitz([x'*x*e x'*y])
 [V,D] = eig(A_tls)
-a = V(1,1);
-b = V(2,1);
-c = -e*(a*x_s+b*y_s);
-p_tls = -[a c]./b % REMOVE AND REPLACE WITH TOTAL LEAST SQUARES
+a = V(1,2);
+b = V(2,2);
+c = mean(1/size(x,1)*(a*+b*y));
+p_tls = [-c -a]./b % REMOVE AND REPLACE WITH TOTAL LEAST SQUARES
 plot(x_fine, p_tls(1) * x_fine + p_tls(2), 'k--')
 
 % Legend --> show which line corresponds to what (if you need to
