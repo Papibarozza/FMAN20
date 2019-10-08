@@ -17,7 +17,7 @@ N = length(x); % number of data points
 plot(x, y, '*'); hold on;
 xlabel('x') 
 ylabel('y')
-title('CHOOSE-APPROPRIATE-TITLE-FOR-REPORT!') % OBS - CHANGE TITLE!
+title('LS and TLS comparison') % OBS - CHANGE TITLE!
 x_fine = [min(x)-0.05,max(x)+0.05]; % used when plotting the fitted lines
 
 A = [ x ones(length(x),1)];
@@ -25,7 +25,9 @@ A = [ x ones(length(x),1)];
 % Here you should write code to obtain the p_ls coefficients (assuming the
 % line has the form y = p_ls(1) * x + p_ls(2)).
 p_ls = (A'*A)\(A'*y)
-plot(x_fine, p_ls(1) * x_fine + p_ls(2))
+k= p_ls(1)
+m = p_ls(2)
+plot(x_fine, k * x_fine + m)
 
 % Fit a line to these data points with total least squares.
 % Note that the total least squares line has the form 
@@ -63,3 +65,10 @@ set(h, 'Position', rect)
 % errors!
 
 % WRITE CODE BELOW TO COMPUTE THE 4 ERRORS
+
+ls_ls = norm(y-A*p_ls)^2
+ls_tls = norm(y-(p_tls(1) * x + p_tls(2)))^2
+
+tls_tls = sum((a*x+b*y+c).^2)
+tls_ls = sum((k*x-y+m).^2)/(sqrt(1+k^2))
+
